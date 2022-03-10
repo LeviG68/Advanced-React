@@ -1,7 +1,9 @@
-import Page from '../components/Page';
-
 export default function IndexPage() {
-  return <Page>
-
-  </Page>
+  return (
+    <>
+      <p> hello!</p>
+      <code> var </code>
+      <p> I am a child </p>
+    </>
+  );
 }
