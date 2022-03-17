@@ -48,6 +48,7 @@ const InnerStyles = styled.div`
   margin: 0 auto;
   padding: 2rem;
 `;
+
 export default function Page({ children, cool }) {
   return (
     <div>
