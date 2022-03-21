@@ -45,8 +45,8 @@ export default withAuth(
     ui: {
       // Show the UI only for people who pass this test
       isAccessAllowed: ({ session }) => {
-         console.log(session);
-         return !!session?.data;
+        console.log(session);
+        return !!session?.data;
       },
     },
     session: withItemData(statelessSessions(sessionConfig), {
