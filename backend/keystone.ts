@@ -1,17 +1,18 @@
-import { User } from './schemas/User';
-import 'dotenv/config';
-import { config, createSchema } from '@keystone-next/keystone/schema';
 import { createAuth } from '@keystone-next/auth';
+import { config, createSchema } from '@keystone-next/keystone/schema';
 import {
   withItemData,
   statelessSessions,
 } from '@keystone-next/keystone/session';
+import { Product } from './schemas/Product';
+import { User } from './schemas/User';
+import 'dotenv/config';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
 
 const sessionConfig = {
-  maxAge: 60 * 60 * 24 * 360, // How long they should stay signed in ?
+  maxAge: 60 * 60 * 24 * 360, // How long they stay signed in?
   secret: process.env.COOKIE_SECRET,
 };
 
@@ -21,12 +22,13 @@ const { withAuth } = createAuth({
   secretField: 'password',
   initFirstItem: {
     fields: ['name', 'email', 'password'],
-    // TODO: add in inital roles here
+    // TODO: Add in inital roles here
   },
 });
 
 export default withAuth(
   config({
+    // @ts-ignore
     server: {
       cors: {
         origin: [process.env.FRONTEND_URL],
@@ -36,18 +38,18 @@ export default withAuth(
     db: {
       adapter: 'mongoose',
       url: databaseURL,
-      // TODO: add data seeding here
+      // TODO: Add data seeding here
     },
     lists: createSchema({
       // Schema items go in here
       User,
+      Product,
     }),
     ui: {
-      // Show the UI only for people who pass this test
-      isAccessAllowed: ({ session }) => {
-        console.log(session);
-        return !!session?.data;
-      },
+      // Show the UI only for pple who pass this test
+      isAccessAllowed: ({ session }) =>
+        // console.log(session);
+        !!session?.data,
     },
     session: withItemData(statelessSessions(sessionConfig), {
       // GraphQL Query
