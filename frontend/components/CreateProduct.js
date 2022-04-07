@@ -1,5 +1,5 @@
-import useForm from "../lib/useForm";
-import Form from "./styles/Form";
+import useForm from '../lib/useForm';
+import Form from './styles/Form';
 
 export default function CreateProduct() {
   const { inputs, handleChange, clearForm, resetForm } = useForm({
@@ -19,7 +19,7 @@ export default function CreateProduct() {
         <label htmlFor="image">
           Image
           <input
-          required
+            required
             type="file"
             id="image"
             name="image"
