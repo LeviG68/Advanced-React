@@ -44,39 +44,37 @@ export default function UpdateProduct({ id }) {
     updateProduct,
     { data: updateData, error: updateError, loading: updateLoading },
   ] = useMutation(UPDATE_PRODUCT_MUTATION);
-// 2.5 create some state for the form inputs
-const { inputs, handleChange, clearForm, resetForm } = useForm(data?.Product);
-console.log(inputs)
-if(loading) return <p>loading...</p>
+  // 2.5 create some state for the form inputs
+  const { inputs, handleChange, clearForm, resetForm } = useForm(data?.Product);
+  console.log(inputs);
+  if (loading) return <p>loading...</p>;
   // 3. We need the from to handle the updates
-return(
-  <Form
+  return (
+    <Form
       onSubmit={async (e) => {
         e.preventDefault();
-        const res =  await updateProduct({
+        const res = await updateProduct({
           variables: {
             id: id,
-              name: inputs.name,
-              description: inputs.description,
-              price: inputs.price
-      
-          }
-        }).catch(console.error)
+            name: inputs.name,
+            description: inputs.description,
+            price: inputs.price,
+          },
+        }).catch(console.error);
         console.log(res);
-      //   // Submit the input fields to the backend:
-      //TODO: handle submit
-      //   const res = await createProduct();
-      //   clearForm();
-      //   // Go to that products page !
-      //   Router.push({
-      //     pathname: `/product/${res.data.createProduct.id}`,
-      //   });
-       }}
+        //   // Submit the input fields to the backend:
+        // TODO: handle submit
+        //   const res = await createProduct();
+        //   clearForm();
+        //   // Go to that products page !
+        //   Router.push({
+        //     pathname: `/product/${res.data.createProduct.id}`,
+        //   });
+      }}
     >
-    <DisplayError error={error || updateError} />
+      <DisplayError error={error || updateError} />
       <fieldset disabled={updateLoading} aria-busy={updateLoading}>
-        <label htmlFor="image">
-        </label>
+        <label htmlFor="image"></label>
         <label htmlFor="name">
           Name
           <input
@@ -114,5 +112,5 @@ return(
         <button type="submit">Update Product</button>
       </fieldset>
     </Form>
-);
+  );
 }
